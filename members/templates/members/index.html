@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}<title>顯示所有資料</title>{% endblock %}
+{% block content %}
+<h2>成員資料表新增</h2>
+  <form action="." method="POST" name="form1">
+    {% csrf_token %}
+    <table border="1" cellspacing="1" cellpadding="4">
+      <tr>
+        <th>姓名</th><td ><input type="text" id="Name" name="Name"/></td>
+      </tr>
+      <tr>
+        <th>性別</th>
+        <td>
+          <input name="Sex" type="radio" id="Sex1" value="M" checked="hecked" />
+          男生
+          <input name="Sex" type="radio" id="Sex2" value="F"/>
+          女生
+        </td>
+      </tr>
+       <tr>
+        <th>生日</th><td><input type="text" id="Birthday" name="Birthday"/></td>
+      </tr>
+      <tr>
+        <th>郵件帳號</th><td><input type="text" id="Email" name="Email"/></td>
+      </tr>
+      <tr><th>電話</th><td ><input type="text" id="Phone" name="Phone"/></td>
+      </tr>
+      <tr>
+        <th>地址</th><td ><input type="text" id="Addr" name="Addr"/></td>
+      </tr>
+      <tr>
+        <th colspan="2" align="center">
+          <input type="submit" name="button" id="button" value="送出">
+          <input type="reset" name="button2" id="button2" value="重設"></th>
+      </tr>
+    </table>
+    <span style="color:red">{{message}}</span>
+  </form>
+<h1 align="left">顯示會員資料</h1>
+<table border="3" cellpadding="10" cellspacing="5"  class="table table-bordered table-striped">
+	<thead class="thead-dark">
+		<tr>
+			<th>編號</th><th>姓名</th><th>性別</th><th>生日</th>
+			<th>郵件帳號</th><th>電話</th><th>地址</th><th></th>
+		</tr>
+	</thread>
+	<tbody>
+		{% for member in members %}
+		<tr>
+			<td>{{ member.id }} </td>
+			<td>{{ member.Name }} </td>
+			<td>{{ member.Sex}} </td>
+			<td>{{ member.Birthday }} </td>
+			<td>{{ member.Email }} </td>
+			<td>{{ member.Phone}} </td>
+			<td>{{ member.Addr }} </td>
+			<td>
+                <a href="/edit/{{member.id}}"	title="編輯">編輯</a>
+                <a href="/delete/{{member.id}}/" title="刪除">刪除</a>
+            </td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+</form>
+{% endblock %}	
