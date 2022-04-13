@@ -1,0 +1,24 @@
+<html>
+{% load static %}
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  
+</head>
+<body>
+  <div id="header">
+    <span class="logo">HELLO THERE !!</span>
+    <div style="text-align: right">
+    <a href="/index/">回首頁</a>
+    </div>
+    
+    {% if request.user.is_authenticated %}
+      <ul class="menu"></ul>
+    {% endif %}
+  </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
